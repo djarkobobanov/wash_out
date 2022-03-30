@@ -76,6 +76,7 @@ module WashOut
       @namespace    = soap_config.namespace
       @name         = controller_path
       @service_name = soap_config.service_name
+      @response_namespace = soap_config.response_namespace
 
       render :template => "wash_out/#{soap_config.wsdl_style}/wsdl", :layout => false,
              :content_type => 'text/xml'
@@ -86,6 +87,7 @@ module WashOut
       @namespace   = soap_config.namespace
       @operation   = soap_action = request.env['wash_out.soap_action']
       @action_spec = self.class.soap_actions[soap_action]
+      @response_namespace = soap_config.response_namespace
 
       result = { 'value' => result } unless result.is_a? Hash
       result = HashWithIndifferentAccess.new(result)
